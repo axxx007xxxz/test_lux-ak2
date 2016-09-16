@@ -11,7 +11,7 @@ do.cleanup=1
 device.name1=lux
 
 # shell variables
-block=block=/dev/block/bootdevice/by-name/boot;
+block=/dev/block/bootdevice/by-name/boot;
 initd=/system/etc/init.d;
 bindir=/system/bin;
 libmodule=/system/lib/modules;
