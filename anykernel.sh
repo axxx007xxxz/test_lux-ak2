@@ -41,14 +41,14 @@ dump_boot() {
   dd if=$block of=/tmp/anykernel/boot.img;
   $bin/unpackbootimg -i /tmp/anykernel/boot.img -o $split_img;
   if [ $? != 0 ]; then
-    ui_print " "; ui_print "Dumping/splitting image failed. Aborting..."; exit 1;
+    ui_print " "; ui_print "Error: dumping/splitting image failed."; exit 1;
   fi;
   mv -f $ramdisk /tmp/anykernel/rdtmp;
   mkdir -p $ramdisk;
   cd $ramdisk;
   gunzip -c $split_img/boot.img-ramdisk.gz | cpio -i;
   if [ $? != 0 -o -z "$(ls $ramdisk)" ]; then
-    ui_print " "; ui_print "Unpacking ramdisk failed. Aborting..."; exit 1;
+    ui_print " "; ui_print "Error: unpacking ramdisk failed."; exit 1;
   fi;
   cp -af /tmp/anykernel/rdtmp/* $ramdisk;
 }
@@ -84,18 +84,18 @@ write_boot() {
   cd $ramdisk;
   find . | cpio -H newc -o | gzip > /tmp/anykernel/ramdisk-new.cpio.gz;
   if [ $? != 0 ]; then
-    ui_print " "; ui_print "Repacking ramdisk failed. Aborting..."; exit 1;
+    ui_print " "; ui_print "Error: repacking ramdisk failed."; exit 1;
   fi;
   $bin/mkbootimg --kernel $kernel --ramdisk /tmp/anykernel/ramdisk-new.cpio.gz $second --cmdline "$cmdline" --board "$board" --base $base --pagesize $pagesize --kernel_offset $kerneloff --ramdisk_offset $ramdiskoff $secondoff --tags_offset $tagsoff $dtb --output /tmp/anykernel/boot-new.img;
   if [ $? != 0 ]; then
-    ui_print " "; ui_print "Repacking image failed. Aborting..."; exit 1;
+    ui_print " "; ui_print "Error: repacking image failed."; exit 1;
   elif [ `wc -c < /tmp/anykernel/boot-new.img` -gt `wc -c < /tmp/anykernel/boot.img` ]; then
-    ui_print " "; ui_print "New image larger than boot partition. Aborting..."; exit 1;
+    ui_print " "; ui_print "Error: new image larger than boot partition."; exit 1;
   fi;
   if [ -f "/data/custom_boot_image_patch.sh" ]; then
     ash /data/custom_boot_image_patch.sh /tmp/anykernel/boot-new.img;
     if [ $? != 0 ]; then
-      ui_print " "; ui_print "User script execution failed. Aborting..."; exit 1;
+      ui_print " "; ui_print "Error: user script execution failed."; exit 1;
     fi;
   fi;
   dd if=/tmp/anykernel/boot-new.img of=$block;
