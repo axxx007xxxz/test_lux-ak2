@@ -36,9 +36,8 @@ fi;
 chmod -R 755 /tmp/anykernel/tools /tmp/anykernel/bin;
 bb=/tmp/anykernel/tools/busybox;
 
-ui_print "$(file_getprop /tmp/anykernel/anykernel.sh kernel.string)";
 ui_print " ";
-ui_print "Flashing Test Kernel!";
+ui_print "Flashing $(file_getprop /tmp/anykernel/anykernel.sh kernel.string) Kernel!";
 ui_print " ";
 mount -o ro /system;
 mount /data;
