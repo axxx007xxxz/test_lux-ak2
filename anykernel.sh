@@ -105,13 +105,10 @@ write_boot() {
   fi;
   dd if=/tmp/anykernel/boot-new.img of=$block;
 }
-
 ## end methods
 
 
 ## AnyKernel install
 dump_boot;
-
 write_boot;
-
 ## end install
