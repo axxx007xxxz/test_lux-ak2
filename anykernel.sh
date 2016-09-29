@@ -5,10 +5,10 @@
 # EDIFY properties
 kernel.name=Test
 do.devicecheck=1
+device.name1=lux
 do.initd=1
 do.modules=1
 do.cleanup=1
-device.name1=lux
 
 # shell variables
 block=/dev/block/bootdevice/by-name/boot;
@@ -209,12 +209,6 @@ patch_fstab() {
 }
 
 ## end methods
-
-
-## AnyKernel permissions
-# set permissions for included files
-chmod -R 755 $ramdisk
-chmod 644 $ramdisk/sbin/media_profiles.xml
 
 
 ## AnyKernel install
