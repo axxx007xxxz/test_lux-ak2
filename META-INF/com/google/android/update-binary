@@ -56,15 +56,6 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.devicecheck)" == 1 ]; then
   fi;
 fi;
 
-if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.initd)" == 1 ]; then
-  ui_print "Creating init.d...";
-  ui_print " ";
-  mount -o remount,rw /system;
-  mkdir /system/etc/init.d;
-  set_perm_recursive 0 0 0755 0755 /system/etc/init.d;
-  mount -o remount,ro /system;
-fi;
-
 ui_print "Installing kernel...";
 for i in $($bb --list); do
   $bb ln -s $bb /tmp/anykernel/bin/$i;
@@ -83,6 +74,15 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.modules)" == 1 ]; then
   mount -o remount,rw /system;
   cp -fr /tmp/anykernel/modules/* /system/lib/modules/;
   set_perm_recursive 0 0 0755 0644 /system/lib/modules;
+  mount -o remount,ro /system;
+fi;
+
+if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.initd)" == 1 ]; then
+  ui_print "Creating init.d...";
+  ui_print " ";
+  mount -o remount,rw /system;
+  mkdir /system/etc/init.d;
+  set_perm_recursive 0 0 0755 0755 /system/etc/init.d;
   mount -o remount,ro /system;
 fi;
 

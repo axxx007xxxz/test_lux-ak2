@@ -6,8 +6,8 @@
 kernel.name=Test
 do.devicecheck=1
 device.name1=lux
-do.initd=1
 do.modules=1
+do.initd=1
 do.cleanup=1
 
 # shell variables
