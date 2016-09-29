@@ -1,6 +1,7 @@
 # AnyKernel2 Ramdisk Mod Script
 # osm0sis @ xda-developers
 
+
 ## AnyKernel setup
 # EDIFY properties
 kernel.name=Test
@@ -100,7 +101,6 @@ write_boot() {
   dd if=/tmp/anykernel/boot-new.img of=$block;
 }
 ## end methods
-
 
 ## AnyKernel install
 dump_boot;
