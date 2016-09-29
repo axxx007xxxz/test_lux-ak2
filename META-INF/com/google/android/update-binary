@@ -43,16 +43,15 @@ mount -o ro /system;
 mount /data;
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.devicecheck)" == 1 ]; then
-  ui_print "Checking device...";
   for i in 1; do
     testname="$(file_getprop /tmp/anykernel/anykernel.sh device.name$i)";
     if [ "$(getprop ro.product.device)" == "$testname" -o "$(getprop ro.build.product)" == "$testname" ]; then
-      ui_print "$testname";
       match=1;
     fi;
   done;
   ui_print " ";
   if [ "$match" != 1 ]; then
+	rm -fr /tmp/anykernel;
     abort "Error: unsupported device.";
   fi;
 fi;
@@ -80,7 +79,7 @@ fi;
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.modules)" == 1 ]; then
   ui_print " ";
-  ui_print "Pushing modules...";
+  ui_print "Installing modules...";
   mount -o remount,rw /system;
   cp -fr /tmp/anykernel/modules/* /system/lib/modules/;
   set_perm_recursive 0 0 0755 0644 /system/lib/modules;
