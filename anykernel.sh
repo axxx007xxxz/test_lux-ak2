@@ -97,12 +97,6 @@ write_boot() {
   elif [ `wc -c < /tmp/anykernel/boot-new.img` -gt `wc -c < /tmp/anykernel/boot.img` ]; then
     ui_print " "; ui_print "Error: new image larger than boot partition."; exit 1;
   fi;
-  if [ -f "/data/custom_boot_image_patch.sh" ]; then
-    ash /data/custom_boot_image_patch.sh /tmp/anykernel/boot-new.img;
-    if [ $? != 0 ]; then
-      ui_print " "; ui_print "Error: user script execution failed."; exit 1;
-    fi;
-  fi;
   dd if=/tmp/anykernel/boot-new.img of=$block;
 }
 ## end methods
