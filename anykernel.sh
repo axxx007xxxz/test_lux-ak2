@@ -13,17 +13,17 @@ do.cleanup=1
 
 # shell variables
 block=/dev/block/bootdevice/by-name/boot;
-initd=/system/etc/init.d;
 bindir=/system/bin;
 libmodule=/system/lib/modules;
+initd=/system/etc/init.d;
 ## end setup
 
 
 ## AnyKernel methods (DO NOT CHANGE)
 # set up extracted files and directories
-ramdisk=/tmp/anykernel/ramdisk;
 bin=/tmp/anykernel/tools;
 split_img=/tmp/anykernel/split_img;
+ramdisk=/tmp/anykernel/ramdisk;
 
 chmod -R 755 $bin;
 mkdir -p $ramdisk $split_img;
