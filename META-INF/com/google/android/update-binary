@@ -36,8 +36,8 @@ fi;
 chmod -R 755 /tmp/anykernel/tools /tmp/anykernel/bin;
 bb=/tmp/anykernel/tools/busybox;
 
-ui_print " ";
 ui_print "Flashing $(file_getprop /tmp/anykernel/anykernel.sh kernel.name) Kernel!";
+ui_print " ";
 ui_print " ";
 mount -o ro /system;
 mount /data;
@@ -49,9 +49,8 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.devicecheck)" == 1 ]; then
       match=1;
     fi;
   done;
-  ui_print " ";
   if [ "$match" != 1 ]; then
-	rm -fr /tmp/anykernel;
+    rm -fr /tmp/anykernel;
     abort "Error: unsupported device.";
   fi;
 fi;
@@ -69,7 +68,6 @@ if [ $? != "0" ]; then
 fi;
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.modules)" == 1 ]; then
-  ui_print " ";
   ui_print "Installing modules...";
   mount -o remount,rw /system;
   cp -fr /tmp/anykernel/modules/* /system/lib/modules/;
@@ -79,7 +77,6 @@ fi;
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.initd)" == 1 ]; then
   ui_print "Creating init.d...";
-  ui_print " ";
   mount -o remount,rw /system;
   mkdir /system/etc/init.d;
   set_perm_recursive 0 0 0755 0755 /system/etc/init.d;
@@ -87,6 +84,7 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.initd)" == 1 ]; then
 fi;
 
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.cleanup)" == 1 ]; then
+  ui_print "Cleaning up...";
   rm -fr /tmp/anykernel;
 fi;
 
