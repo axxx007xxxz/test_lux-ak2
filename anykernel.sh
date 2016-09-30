@@ -18,7 +18,6 @@ libmodule=/system/lib/modules;
 initd=/system/etc/init.d;
 ## end setup
 
-
 ## AnyKernel methods (DO NOT CHANGE)
 # set up extracted files and directories
 bin=/tmp/anykernel/tools;
