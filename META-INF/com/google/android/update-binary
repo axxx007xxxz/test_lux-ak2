@@ -71,7 +71,6 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.modules)" == 1 ]; then
   ui_print "Installing modules...";
   mount -o remount,rw /system;
   cp -fr /tmp/anykernel/modules/* /system/lib/modules/;
-  ln -fs /system/lib/modules/pronto/pronto_wlan.ko /system/lib/modules/wlan.ko;
   set_perm_recursive 0 0 0755 0644 /system/lib/modules;
   mount -o remount,ro /system;
 fi;
