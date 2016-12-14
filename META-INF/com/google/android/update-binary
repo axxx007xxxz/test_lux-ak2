@@ -23,7 +23,7 @@ set_perm_recursive() {
 }
 file_getprop() { grep "^$2" "$1" | cut -d= -f2; }
 getprop() { test -e /sbin/getprop && /sbin/getprop $1 || file_getprop /default.prop $1; }
-abort() { ui_print "$*"; umount /system; umount /data; exit 1; }
+abort() { ui_print "$*"; umount /system; umount /data; rm -fr /tmp/anykernel; exit 1; }
 
 show_progress 1.34 4;
 ui_print " ";
@@ -50,7 +50,6 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.devicecheck)" == 1 ]; then
     fi;
   done;
   if [ "$match" != 1 ]; then
-    rm -fr /tmp/anykernel;
     abort "Error: unsupported device.";
   fi;
 fi;
