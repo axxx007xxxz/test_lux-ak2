@@ -82,14 +82,6 @@ if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.modules)" == 1 ]; then
   mount -o ro,remount -t auto /system;
 fi;
 
-if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.initd)" == 1 ]; then
-  ui_print "Creating init.d...";
-  mount -o rw,remount -t auto /system;
-  mkdir $root/system/etc/init.d;
-  set_perm_recursive 0 0 0755 0755 $root/system/etc/init.d;
-  mount -o ro,remount -t auto /system;
-fi;
-
 if [ "$(file_getprop /tmp/anykernel/anykernel.sh do.cleanup)" == 1 ]; then
   ui_print "Cleaning up...";
   cleanup;
