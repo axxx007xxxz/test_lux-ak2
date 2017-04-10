@@ -2,14 +2,17 @@
 # osm0sis @ xda-developers
 
 
-# EDIFY properties
+## AnyKernel setup
+# begin properties
+properties() {
 kernel.name=Test
 do.devicecheck=1
 device.name1=lux
 do.modules=1
 do.cleanup=1
 do.cleanuponabort=0
-
+}
+# end properties
 
 # shell variables
 block=/dev/block/bootdevice/by-name/boot;
