@@ -25,7 +25,7 @@ is_slot_device=0;
 
 # begin ramdisk changes
 # set permissions for included ramdisk files
-chmod -R 755 $ramdisk
+chmod -R 750 $ramdisk/*;
 
 # end ramdisk changes
 
