@@ -27,7 +27,7 @@ ramdisk_compression=auto;
 # begin ramdisk changes
 # set permissions/ownership for included ramdisk files
 chmod -R 750 $ramdisk/*;
-
+chown -R root:root $ramdisk/*;
 # end ramdisk changes
 
 
